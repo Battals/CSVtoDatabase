@@ -7,9 +7,9 @@ import java.sql.PreparedStatement;
 
 public class CSVconsume {
     public static void main(String[] args) {
-        String jdbcUrl = "jdbc:mysql://localhost:3306/imdb";
-        String userName = "root";
-        String passwoord = "";
+        String jdbcUrl = "jdbc:mysql://localhost:3306/imdb"; //Indtat din databases URL
+        String userName = "root"; // Indtast din databases userName
+        String passwoord = "x"; //Indtast dit database password
         String filePath = "/Users/Ozcan/Desktop/imdb-data (1).csv";
         int batchsize = 20;
         Connection connection = null;
@@ -17,6 +17,7 @@ public class CSVconsume {
         try {
             connection = DriverManager.getConnection(jdbcUrl, userName, passwoord);
             connection.setAutoCommit(false);
+            //Indtast dine unikke parametre.
             String sql = "Insert into data(year,length,title,subject,popularity,awards) values(?,?,?,?,?,?)";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -28,6 +29,7 @@ public class CSVconsume {
 
             lineReader.readLine();
             while ((lineText = lineReader.readLine()) != null) {
+                //Indtast dine unikke parametre.
                 String[] data = lineText.split(";");
                 String year = data[0];
                 String length = data[1];
